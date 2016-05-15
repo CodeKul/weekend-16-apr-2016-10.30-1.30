@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.codekul.myfirrstapp.MainActivity">
+
+    <EditText android:id="@+id/edtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name" />
+
+    <Button android:id="@+id/btnOkay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Okay"
+        android:paddingLeft="20px"
+        android:layout_marginLeft="30px"/>
+
+    <TextView
+        android:id="@+id/textState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#d8d8d8"
+        android:gravity="center"
+        android:textSize="50px"
+        android:text="state"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50px"
+        android:background="#e8e8e8"
+        android:text="Temp"
+        android:layout_gravity="right"/>
+
+</LinearLayout>
