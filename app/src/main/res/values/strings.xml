@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AssestsAndResources</string>
+    <string name="userName">User Name</string>
+    <string name="pasword">Password</string>
+    <string name="okay">Okay</string>
+    <string name="Cancel">Cancel</string>
+</resources>
