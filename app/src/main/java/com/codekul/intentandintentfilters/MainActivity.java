@@ -28,10 +28,18 @@ public class MainActivity extends AppCompatActivity {
 
                 String url = "http://www.codekul.com/android-training-institute-in-pune.html";
                 //Intent i = new Intent(MainActivity.this,NewsActivity.class);
-                Intent i = new Intent();
+                /*Intent i = new Intent();
                 i.setAction(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
-                startActivity(i);
+                startActivity(i);*/
+
+                Intent baseIntent = new Intent(Intent.ACTION_VIEW);
+                baseIntent.setData(Uri.parse(url));
+
+                Intent chooserIntent =
+                        Intent.createChooser(baseIntent, "Select Application");
+
+                startActivity(chooserIntent);
             }
         });
     }

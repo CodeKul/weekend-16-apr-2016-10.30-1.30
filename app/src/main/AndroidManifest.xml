@@ -22,6 +22,7 @@
         <activity android:name=".NewsActivity" >
             <intent-filter>
                 <action android:name="com.codekul.action.news"/>
+                <action android:name="android.intent.action.VIEW"/>
                 <category android:name="com.codekul.category.news"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
@@ -29,6 +30,7 @@
         <activity android:name=".InfoActivity">
             <intent-filter>
                 <action android:name="com.codekul.action.info"/>
+                <action android:name="android.intent.action.VIEW"/>
                 <category android:name="com.codekul.category.info"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <data android:scheme="http"/>

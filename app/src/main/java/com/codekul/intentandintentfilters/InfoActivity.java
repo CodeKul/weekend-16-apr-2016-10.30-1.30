@@ -20,10 +20,10 @@ public class InfoActivity extends AppCompatActivity {
         String action = responsibleIntent.getAction();
         Log.i("@codekul","Action - "+action);
 
-        Set<String> setCategories = responsibleIntent.getCategories();
-        for(String category : setCategories){
-            Log.i("@codekul","Category - "+category);
-        }
+//        Set<String> setCategories = responsibleIntent.getCategories();
+//        for(String category : setCategories){
+//            Log.i("@codekul","Category - "+category);
+//        }
 
         Uri uri = responsibleIntent.getData();
         Log.i("@codekul","Uri - "+uri.toString());
