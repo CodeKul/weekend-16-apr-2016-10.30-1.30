@@ -9,6 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.codekul.domain.Car;
+import com.codekul.repository.CarRepoImpl;
+import com.codekul.repository.CarRepository;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final DbHelper helper = new DbHelper(this,"carDb",null,1);
+        final CarRepository repository = new CarRepoImpl(helper);
 
         findViewById(R.id.btnInsert).setOnClickListener(new View.OnClickListener(){
             @Override
@@ -26,28 +31,42 @@ public class MainActivity extends AppCompatActivity {
                 final EditText edCarNum = (EditText) findViewById(R.id.edtCarNum);
                 final EditText edCarCountry = (EditText) findViewById(R.id.edtCarCountry);
 
-                SQLiteDatabase sqDb = helper.getWritableDatabase();
-                //sqDb.execSQL("insert into carTab values('10','android','india')");
+                Car car = new Car();
+                car.setCarName(edCarName.getText().toString());
+                car.setCarNum(edCarNum.getText().toString());
+                car.setCarOwner(edCarCountry.getText().toString());
 
-                ContentValues values = new ContentValues();
-                values.put("carNum",edCarNum.getText().toString());
-                values.put("carOwner",edCarName.getText().toString());
-                values.put("carCountry",edCarCountry.getText().toString());
-
-                if(sqDb.insert("carTab",null,values) != -1){
-                    Log.i("@codekul","Data inserted Successfully");
+                try {
+                    repository.insert(car);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                else {
-                    Log.i("@codekul","problem in data insertion");
-                }
-
-                sqDb.close();
             }
         });
 
         findViewById(R.id.btnUpdate).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
+
+                final EditText edCarName = (EditText) findViewById(R.id.edtCarName);
+                final EditText edCarNum = (EditText) findViewById(R.id.edtCarNum);
+                final EditText edCarCountry = (EditText) findViewById(R.id.edtCarCountry);
+
+                SQLiteDatabase sqDb =
+                        helper.getWritableDatabase();
+
+                String table = "carTab";
+                ContentValues values = new ContentValues();
+                values.put("carName",edCarName.getText().toString());
+                values.put("carCountry",edCarCountry.getText().toString());
+
+                String whereClause = "carNum = ?";
+                String[] whereArgs = {edCarNum.getText().toString()};
+
+                sqDb.update(table,values,whereClause,whereArgs);
+
+                sqDb.close();
             }
         });
 
@@ -55,7 +74,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                final EditText edCarNum = (EditText)
+                        findViewById(R.id.edtCarNum);
 
+               SQLiteDatabase sqDb = helper.getWritableDatabase();
+
+                String table = "carTab";
+                String whereClause = "carNum = ?";
+                String[] whereArgs = {edCarNum.getText().toString()};
+
+                sqDb.delete(table,whereClause,whereArgs);
+
+                sqDb.close();
             }
         });
 
