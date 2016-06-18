@@ -1,8 +1,12 @@
 package com.codekul.sqlite;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -121,5 +125,47 @@ public class MainActivity extends AppCompatActivity {
                 sqDb.close();
             }
         });
+
+        findViewById(R.id.btnCustomProvider)
+                .setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                final Cursor cursor = getTheCursor();
+
+                while(cursor.moveToNext()){
+
+                    String contactNumber = cursor.getString(
+                            cursor.getColumnIndex("contactNumber"));
+
+                    Log.i("@codekul","Contact - "+contactNumber);
+                }
+            }
+        });
+    }
+
+    private Cursor getTheCursor(){
+
+        ContentResolver resolver =
+                getContentResolver();
+
+        Uri uri = Uri.parse("content://com.codekul.dbprovider");
+
+        String[] projection = null;
+
+        String selection = null;
+        String[] selectionArgs = null;
+        String sortOrder = null;
+
+        Cursor cursor =
+                resolver.query(uri,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        sortOrder);
+
+        Log.i("@codekul","Cursor is "+cursor);
+
+        return cursor;
     }
 }

@@ -50,4 +50,9 @@
         android:layout_height="wrap_content"
         android:text="Display" />
 
+    <Button android:id="@+id/btnCustomProvider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Custom Provider" />
+
 </LinearLayout>
